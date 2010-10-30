@@ -5,18 +5,23 @@
 import os, sys, time, codecs
 import sqlite3
 
-DBFILE="PalmDatabase.db3"
-
+# Get db file name/location
+try:
+    DBFILE=sys.argv[1]
+except:
+    print "Syntax: %s dbfile.db3" % sys.argv[0]
+    sys.exit(1)
+    
 # open database with sqlite3
 if os.path.exists(DBFILE):
     conn = sqlite3.connect(DBFILE)
     c = conn.cursor()
 else:
-	print "No database"
-
+	print "ERROR: Database file %s doesn't exist" % DBFILE
+	sys.exit(1)
+    
 classSent = 0;
 classRcvd = 2;
-
 
 # get all messages
 
